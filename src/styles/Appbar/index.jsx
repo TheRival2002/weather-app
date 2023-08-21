@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Card, CardContent, Grid, Stack } from "@mui/material";
 import { styled } from "@mui/material";
 
 export const AppbarContainer = styled(Box)(({ theme }) => ({
@@ -22,4 +22,20 @@ export const GridMain = styled(Grid)(({ theme }) => ({
 
 export const StackSpaced = styled(Stack)(() => ({
   justifyContent: "space-between",
+  alignItems: "center",
+  flexDirection: "row",
+  gap: ".5rem",
+}));
+
+export const StyledCard = styled(Card)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  borderRadius: "1rem",
+}));
+
+export const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  minHeight: "210px",
 }));
