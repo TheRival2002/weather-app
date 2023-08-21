@@ -1,7 +1,9 @@
 import Brightness5OutlinedIcon from "@mui/icons-material/Brightness5Outlined";
 import NightsStayRoundedIcon from "@mui/icons-material/NightsStayRounded";
-import { StyledButtonGroup } from "../../styles/components/StyledButtonGroup";
-import { StyledToggleButton } from "../../styles/components/StyledToggleButton";
+import {
+  StyledToggleButtonGroup,
+  StyledToggleButton,
+} from "../../styles/components/StyledToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { colorModeActions } from "../../redux/color-mode-slice";
 
@@ -18,7 +20,7 @@ export const ColorMode = () => {
   };
 
   return (
-    <StyledButtonGroup
+    <StyledToggleButtonGroup
       value={colorMode}
       exclusive
       aria-label="light or dark mode"
@@ -38,6 +40,6 @@ export const ColorMode = () => {
       >
         <NightsStayRoundedIcon sx={{ fontSize: "1.5rem" }} />
       </StyledToggleButton>
-    </StyledButtonGroup>
+    </StyledToggleButtonGroup>
   );
 };

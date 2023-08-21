@@ -3,7 +3,7 @@ import { styled } from "@mui/material";
 
 export const AppbarContainer = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.light_black.main,
-  padding: "1em 2em",
+  padding: "1.25rem 2rem",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -17,7 +17,7 @@ export const AppbarContentContainer = styled(Box)(() => ({
 
 export const GridMain = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.light_black.main,
-  padding: "1em 2em",
+  padding: ".5rem 2rem",
 }));
 
 export const StackSpaced = styled(Stack)(() => ({
