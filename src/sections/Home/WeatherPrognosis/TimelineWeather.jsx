@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import TimelineOptions from "./TimelineOptions";
 
-const WeatherPrognosis = () => {
+const TimelineWeather = () => {
   return (
     <Stack direction="column" spacing={2}>
       <TimelineOptions />
@@ -9,4 +9,4 @@ const WeatherPrognosis = () => {
   );
 };
 
-export default WeatherPrognosis;
+export default TimelineWeather;

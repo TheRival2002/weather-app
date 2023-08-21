@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import WeatherPrognosis from "../sections/Home/WeatherPrognosis";
+import WeatherPrognosis from "../sections/Home/WeatherPrognosis/WeatherPrognosis";
 import { GridMain } from "../styles/Appbar";
 
 const MainContent = () => {
