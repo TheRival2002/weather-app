@@ -15,7 +15,7 @@ function App() {
       >
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/weather-app/" element={<Home />} />
         </Routes>
       </Container>
     </ThemeProvider>
