@@ -7,26 +7,18 @@ import {
 import RainImg from "../../../../assets/rainy-day.png";
 import SunImg from "../../../../assets/sun.png";
 import StormImg from "../../../../assets/storm.png";
+import { useSelector } from "react-redux";
 
-export const TimelineWeekItem = ({
-  dayName,
-  condition,
-  humidity,
-  pressure,
-  realFeel,
-  sunrise,
-  sunset,
-  wind,
-  isSelected,
-}) => {
+export const TimelineWeekItem = (props) => {
+  const timelineData = useSelector((state) => state.timelineData.timelineData);
   return (
     <StyledCard
       sx={{
-        backgroundColor: isSelected && "secondary.main",
-        color: isSelected && "black.main",
+        backgroundColor: props.isSelected && "secondary.main",
+        color: props.isSelected && "black.main",
       }}
     >
-      <StyledCardContent sx={isSelected && { alignItems: "start" }}>
+      <StyledCardContent sx={props.isSelected && { alignItems: "start" }}>
         <Typography
           variant="subtitle1"
           component="h2"
@@ -34,25 +26,28 @@ export const TimelineWeekItem = ({
             width: "100%",
             paddingBottom: ".5rem",
             fontWeight: "600",
-            textAlign: !isSelected && "center",
+            textAlign: !props.isSelected && "center",
             borderBottom: `1px solid #a7a7a7`,
           }}
         >
-          {isSelected ? dayName : dayName.slice(0, 3)}
+          {props.isSelected ? props.dayName : props.dayName.slice(0, 3)}
         </Typography>
-        <StackSpaced width="100%" paddingTop={isSelected && ".75rem"}>
-          {isSelected && (
-            <Typography variant={isSelected ? "h3" : "h4"} component="span">
-              {Math.round(realFeel)}°
+        <StackSpaced width="100%" paddingTop={props.isSelected && ".75rem"}>
+          {props.isSelected && (
+            <Typography
+              variant={props.isSelected ? "h3" : "h4"}
+              component="span"
+            >
+              {Math.round(props.realFeel)}°
             </Typography>
           )}
           <CardMedia
             component="img"
             alt="picture of weather condition"
             image={
-              condition.includes("Sunny")
+              props.condition.includes("Sunny")
                 ? SunImg
-                : condition.includes("rain")
+                : props.condition.includes("rain")
                 ? RainImg
                 : StormImg
             }
@@ -61,75 +56,87 @@ export const TimelineWeekItem = ({
           />
         </StackSpaced>
         <StackSpaced>
-          {!isSelected && (
+          {!props.isSelected && (
             <Typography variant="h4" component="span">
-              {Math.round(realFeel)}°
+              {Math.round(props.realFeel)}°
             </Typography>
           )}
-          {isSelected && (
+          {props.isSelected && (
             <Box>
               <Typography variant="body2" component="p">
-                Real feel:
+                {timelineData === "forecast" ? "Real feel:" : "Carbon:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {Math.round(realFeel)}°
+                  {timelineData === "forecast"
+                    ? `${Math.round(props.realFeel)}°`
+                    : props.co.toFixed(2)}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Pressure:
+                {timelineData === "forecast" ? "Pressure:" : "Nitrogen:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {pressure}MB
+                  {timelineData === "forecast"
+                    ? `${props.pressure}`
+                    : props.no2.toFixed(2)}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Humidity:
+                {timelineData === "forecast" ? "Humidity:" : "Ozone:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {humidity}%
+                  {timelineData === "forecast"
+                    ? `${props.humidity}%`
+                    : props.o3.toFixed(2)}
                 </Typography>
               </Typography>
             </Box>
           )}
-          {isSelected && (
+          {props.isSelected && (
             <Box>
               <Typography variant="body2" component="p">
-                Wind:
+                {timelineData === "forecast" ? "Wind:" : "Sulphur:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {wind} km/h
+                  {timelineData === "forecast"
+                    ? `${props.wind} km/h`
+                    : props.so2.toFixed(2)}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Sunrise:
+                {timelineData === "forecast" ? "Sunrise:" : "PM10:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {sunrise}
+                  {timelineData === "forecast"
+                    ? `${props.sunrise}`
+                    : props.pm10.toFixed(2)}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Sunset:
+                {timelineData === "forecast" ? "Sunset:" : "PM2.5:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {sunset}
+                  {timelineData === "forecast"
+                    ? `${props.sunset}`
+                    : props.pm2_5.toFixed(2)}
                 </Typography>
               </Typography>
             </Box>

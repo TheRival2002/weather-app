@@ -9,6 +9,7 @@ export const MyList = styled(List)(() => ({
 
 export const MyListItem = styled(ListItem)(() => ({
   width: "max-content",
+  flexGrow: "1",
   justifyContent: "start",
   gap: ".3125rem",
 }));
