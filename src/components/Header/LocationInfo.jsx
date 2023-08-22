@@ -1,4 +1,4 @@
-import { ListItemIcon, ListItemText } from "@mui/material";
+import { ListItemIcon, ListItemText, Typography } from "@mui/material";
 import FmdGoodRoundedIcon from "@mui/icons-material/FmdGoodRounded";
 import theme from "../../styles/theme";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,15 +27,20 @@ export const LocationInfo = () => {
           sx={{ fontSize: "1.5rem", color: theme.palette.white.main }}
         />
       </ListItemIcon>
-      <ListItemText primary={`${city}, `} />
-      <ListItemText
-        primary={country}
+      <Typography variant="body1" component="h1">
+        {`${city}, `}
+      </Typography>
+      <Typography
+        variant="body1"
+        component="h2"
         sx={{
           color: theme.palette.white_dimmed.main,
           ml: ".25rem",
           width: "max-content",
         }}
-      />
+      >
+        {country}
+      </Typography>
     </>
   );
 };

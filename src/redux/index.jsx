@@ -6,6 +6,7 @@ import daysQuantityDataSlice from "./days-quantity-data-slice";
 import timelineDataSlice from "./timeline-data-slice";
 import weekDaySlice from "./week-day-slice";
 import forecastWeekSlice from "./forecast-week-slice";
+import forecastTomorrowSlice from "./forecast-tomorrow-slice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     timelineData: timelineDataSlice.reducer,
     selectedWeekDay: weekDaySlice.reducer,
     forecastWeek: forecastWeekSlice.reducer,
+    forecastTomorrow: forecastTomorrowSlice.reducer,
   },
 });
 

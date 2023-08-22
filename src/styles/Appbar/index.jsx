@@ -27,12 +27,19 @@ export const StackSpaced = styled(Stack)(() => ({
   gap: ".5rem",
 }));
 
+export const StackColumn = styled(Stack)(() => ({
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "start",
+  gap: ".5rem",
+}));
+
 export const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   borderRadius: "1rem",
 }));
 
-export const StyledCardContent = styled(CardContent)(({ theme }) => ({
+export const StyledCardContent = styled(CardContent)(() => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
