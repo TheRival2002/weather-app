@@ -4,7 +4,7 @@ import TimelineWeekData from "./TimelineWeekData";
 
 const TimelineWeather = () => {
   return (
-    <Stack direction="column" spacing={2}>
+    <Stack direction="column" spacing={4}>
       <TimelineOptions />
       <TimelineWeekData />
     </Stack>

@@ -4,29 +4,58 @@ import {
   StyledCard,
   StyledCardContent,
 } from "../../../../styles/Appbar";
+import RainImg from "../../../../assets/rainy-day.png";
+import SunImg from "../../../../assets/sun.png";
+import StormImg from "../../../../assets/storm.png";
 
-export const TimelineWeekItem = ({ index, isSelected }) => {
+export const TimelineWeekItem = ({
+  dayName,
+  condition,
+  humidity,
+  pressure,
+  realFeel,
+  sunrise,
+  sunset,
+  wind,
+  isSelected,
+}) => {
   return (
-    <StyledCard>
+    <StyledCard
+      sx={{
+        backgroundColor: isSelected && "secondary.main",
+        color: isSelected && "black.main",
+      }}
+    >
       <StyledCardContent sx={isSelected && { alignItems: "start" }}>
         <Typography
           variant="subtitle1"
           component="h2"
-          sx={{ fontWeight: "600" }}
+          sx={{
+            width: "100%",
+            paddingBottom: ".5rem",
+            fontWeight: "600",
+            textAlign: !isSelected && "center",
+            borderBottom: `1px solid #a7a7a7`,
+          }}
         >
-          Monday
-          {/* when data added with props check if it is selected, if it is display full day if not only first 3 letters  */}
+          {isSelected ? dayName : dayName.slice(0, 3)}
         </Typography>
-        <StackSpaced width="100%">
+        <StackSpaced width="100%" paddingTop={isSelected && ".75rem"}>
           {isSelected && (
             <Typography variant={isSelected ? "h3" : "h4"} component="span">
-              16°
+              {Math.round(realFeel)}°
             </Typography>
           )}
           <CardMedia
             component="img"
             alt="picture of weather condition"
-            image="/src/assets/rainy-day.png"
+            image={
+              condition.includes("Sunny")
+                ? SunImg
+                : condition.includes("rain")
+                ? RainImg
+                : StormImg
+            }
             height="60px"
             sx={{ objectFit: "contain" }}
           />
@@ -34,7 +63,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
         <StackSpaced>
           {!isSelected && (
             <Typography variant="h4" component="span">
-              16°
+              {Math.round(realFeel)}°
             </Typography>
           )}
           {isSelected && (
@@ -46,7 +75,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  18°
+                  {Math.round(realFeel)}°
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
@@ -56,7 +85,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  1000MB
+                  {pressure}MB
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
@@ -66,7 +95,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  51%
+                  {humidity}%
                 </Typography>
               </Typography>
             </Box>
@@ -80,7 +109,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  5-8 km/h
+                  {wind} km/h
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
@@ -90,7 +119,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  6:02 AM
+                  {sunrise}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
@@ -100,7 +129,7 @@ export const TimelineWeekItem = ({ index, isSelected }) => {
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  6:02 PM
+                  {sunset}
                 </Typography>
               </Typography>
             </Box>

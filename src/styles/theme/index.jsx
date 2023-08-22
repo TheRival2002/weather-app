@@ -11,6 +11,7 @@ export const Colors = {
   //////////////////
   light_black: "#111015",
   white: "#ffffff",
+  black: "#000000",
   white_dimmed: "#a7a7a7",
 };
 
@@ -28,6 +29,9 @@ const theme = createTheme({
     },
     text: {
       primary: Colors.text_primary,
+    },
+    black: {
+      main: Colors.black,
     },
     light_black: {
       main: Colors.light_black,
