@@ -19,6 +19,9 @@ export const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
   "&.Mui-selected": {
     color: theme.palette.white.main,
   },
+  "&:hover, &:focus": {
+    color: theme.palette.white.main,
+  },
 }));
 
 export const StyledListItemText = styled(ListItemText)(() => ({

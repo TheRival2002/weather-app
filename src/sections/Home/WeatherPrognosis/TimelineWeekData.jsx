@@ -99,7 +99,13 @@ const TimelineWeekData = () => {
     return (
       <MyListItem disablePadding key={index}>
         <ListItemButton
-          sx={{ padding: "0" }}
+          sx={{
+            padding: "0",
+            "&:focus-visible": {
+              outline: "1px solid",
+              outlineColor: "primary.light",
+            },
+          }}
           selected={selectedWeekDay === index}
           onClick={() => handleClick(index)}
         >

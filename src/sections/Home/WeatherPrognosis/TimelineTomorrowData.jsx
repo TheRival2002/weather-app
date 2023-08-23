@@ -55,6 +55,44 @@ const TimelineTomorrowData = () => {
         },
       ];
       dispatch(forecastTomorrowActions.changeForecast(data));
+    } else if (
+      typeof forecast !== "string" &&
+      !Array.isArray(forecast) &&
+      timelineData === "air quality"
+    ) {
+      const morning = forecast.forecast.forecastday[1].hour[10];
+      const morning_air = morning.air_quality;
+      const morning_co = morning_air.co;
+      const morning_no2 = morning_air.no2;
+      const morning_pm10 = morning_air.pm10;
+      const morning_condition = morning.condition.text;
+
+      const afternoon = forecast.forecast.forecastday[1].hour[20];
+      const afternoon_air = afternoon.air_quality;
+      const afternoon_co = afternoon_air.co;
+      const afternoon_no2 = afternoon_air.no2;
+      const afternoon_pm10 = afternoon_air.pm10;
+      const afternoon_condition = afternoon.condition.text;
+
+      const data = [
+        {
+          morning: {
+            morning_co,
+            morning_no2,
+            morning_pm10,
+            morning_condition,
+          },
+        },
+        {
+          afternoon: {
+            afternoon_co,
+            afternoon_no2,
+            afternoon_pm10,
+            afternoon_condition,
+          },
+        },
+      ];
+      dispatch(forecastTomorrowActions.changeAir(data));
     }
   }, [forecast, timelineData]);
 
@@ -62,6 +100,8 @@ const TimelineTomorrowData = () => {
 
   if (timelineData === "forecast") {
     data = useSelector((state) => state.forecastTomorrow.forecast);
+  } else {
+    data = useSelector((state) => state.forecastTomorrow.air_qual);
   }
 
   return (
@@ -94,33 +134,39 @@ const TimelineTomorrowData = () => {
                 Morning:
               </Typography>
               <Typography variant="body2" component="p">
-                Temperature:
+                {timelineData === "forecast" ? "Temperature:" : "Carbon:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[0].morning.morning_temp}°
+                  {timelineData === "forecast"
+                    ? `${data[0].morning.morning_temp}°`
+                    : data[0].morning.morning_co}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Wind:
+                {timelineData === "forecast" ? "Wind:" : "Nitrogen:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[0].morning.morning_wind} km/h
+                  {timelineData === "forecast"
+                    ? `${data[0].morning.morning_wind} km/h`
+                    : data[0].morning.morning_no2}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Pressure:
+                {timelineData === "forecast" ? "Pressure:" : "PM10:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[0].morning.morning_pressure}MB
+                  {timelineData === "forecast"
+                    ? `${data[0].morning.morning_pressure}MB`
+                    : data[0].morning.morning_pm10}
                 </Typography>
               </Typography>
             </StackColumn>
@@ -144,33 +190,39 @@ const TimelineTomorrowData = () => {
                 Afternoon:
               </Typography>
               <Typography variant="body2" component="p">
-                Temperature:
+                {timelineData === "forecast" ? "Temperature:" : "Carbon:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[1].afternoon.afternoon_temp}°
+                  {timelineData === "forecast"
+                    ? `${data[1].afternoon.afternoon_temp}°`
+                    : data[1].afternoon.afternoon_co}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Wind:
+                {timelineData === "forecast" ? "Wind:" : "Nitrogen:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[1].afternoon.afternoon_temp} km/h
+                  {timelineData === "forecast"
+                    ? `${data[1].afternoon.afternoon_wind} km/h`
+                    : data[1].afternoon.afternoon_no2}
                 </Typography>
               </Typography>
               <Typography variant="body2" component="p">
-                Pressure:
+                {timelineData === "forecast" ? "Pressure:" : "PM10:"}
                 <Typography
                   variant="body2"
                   component="span"
                   sx={{ marginLeft: ".25rem", fontWeight: "700" }}
                 >
-                  {data[1].afternoon.afternoon_temp}MB
+                  {timelineData === "forecast"
+                    ? `${data[1].afternoon.afternoon_pressure}MB`
+                    : data[1].afternoon.afternoon_pm10}
                 </Typography>
               </Typography>
             </StackColumn>

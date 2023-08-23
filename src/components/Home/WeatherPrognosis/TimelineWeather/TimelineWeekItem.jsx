@@ -16,6 +16,9 @@ export const TimelineWeekItem = (props) => {
       sx={{
         backgroundColor: props.isSelected && "secondary.main",
         color: props.isSelected && "black.main",
+        "&:hover": {
+          backgroundColor: props.isSelected === false && "primary.light",
+        },
       }}
     >
       <StyledCardContent sx={props.isSelected && { alignItems: "start" }}>

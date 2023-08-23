@@ -21,10 +21,31 @@ const forecastTomorrowSlice = createSlice({
         },
       },
     ],
+    air_qual: [
+      {
+        morning: {
+          co: 270.4,
+          no2: 4.9,
+          pm10: 5.4,
+          morning_condition: "Sunny",
+        },
+      },
+      {
+        afternoon: {
+          co: 270.4,
+          no2: 4.9,
+          pm10: 5.4,
+          afternoon_condition: "Sunny",
+        },
+      },
+    ],
   },
   reducers: {
     changeForecast(state, action) {
       state.forecast = action.payload;
+    },
+    changeAir(state, action) {
+      state.air_qual = action.payload;
     },
   },
 });
