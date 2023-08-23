@@ -6,7 +6,12 @@ import GlobalMap from "../sections/Home/GlobalMap/GlobalMap";
 
 const MainContent = () => {
   return (
-    <GridMain component="main" rowSpacing={4} container>
+    <GridMain
+      component="main"
+      rowSpacing={4}
+      container
+      borderRadius="0 0 2rem 2rem"
+    >
       <Grid item xs={8}>
         <WeatherPrognosis />
       </Grid>

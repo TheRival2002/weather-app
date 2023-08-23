@@ -3,7 +3,12 @@ import { GoogleMap } from "../../../components/Home/GlobalMap/GoogleMap";
 
 const GlobalMap = () => {
   return (
-    <Stack direction="column" spacing={4} justifyContent="center">
+    <Stack
+      direction="column"
+      spacing={4}
+      justifyContent="center"
+      paddingBottom={4}
+    >
       <Typography variant="h5" component="h3" fontWeight={600}>
         Global map
       </Typography>
