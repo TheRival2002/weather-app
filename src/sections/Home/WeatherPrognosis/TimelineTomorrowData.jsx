@@ -29,12 +29,14 @@ const TimelineTomorrowData = () => {
       const morning_wind = morning.wind_kph;
       const morning_pressure = morning.pressure_mb;
       const morning_condition = morning.condition.text;
+      const morning_date = forecast.forecast.forecastday[1].date;
 
       const afternoon = forecast.forecast.forecastday[1].hour[20];
       const afternoon_temp = afternoon.temp_c;
       const afternoon_wind = afternoon.wind_kph;
       const afternoon_pressure = afternoon.pressure_mb;
       const afternoon_condition = afternoon.condition.text;
+      const afternoon_date = forecast.forecast.forecastday[1].date;
 
       const data = [
         {
@@ -43,6 +45,7 @@ const TimelineTomorrowData = () => {
             morning_wind,
             morning_pressure,
             morning_condition,
+            morning_date,
           },
         },
         {
@@ -51,6 +54,7 @@ const TimelineTomorrowData = () => {
             afternoon_wind,
             afternoon_pressure,
             afternoon_condition,
+            afternoon_date,
           },
         },
       ];
@@ -66,6 +70,7 @@ const TimelineTomorrowData = () => {
       const morning_no2 = morning_air.no2;
       const morning_pm10 = morning_air.pm10;
       const morning_condition = morning.condition.text;
+      const morning_date = forecast.forecast.forecastday[1].date;
 
       const afternoon = forecast.forecast.forecastday[1].hour[20];
       const afternoon_air = afternoon.air_quality;
@@ -73,6 +78,7 @@ const TimelineTomorrowData = () => {
       const afternoon_no2 = afternoon_air.no2;
       const afternoon_pm10 = afternoon_air.pm10;
       const afternoon_condition = afternoon.condition.text;
+      const afternoon_date = forecast.forecast.forecastday[1].date;
 
       const data = [
         {
@@ -81,6 +87,7 @@ const TimelineTomorrowData = () => {
             morning_no2,
             morning_pm10,
             morning_condition,
+            morning_date,
           },
         },
         {
@@ -89,6 +96,7 @@ const TimelineTomorrowData = () => {
             afternoon_no2,
             afternoon_pm10,
             afternoon_condition,
+            afternoon_date,
           },
         },
       ];
@@ -121,10 +129,10 @@ const TimelineTomorrowData = () => {
               fontWeight: "600",
             }}
           >
-            Tuesday
+            Friday
           </Typography>
           <Typography variant="subtitle1" component="h3">
-            2023-08-23
+            {data[0].morning.morning_date}
           </Typography>
         </StackSpaced>
         <StackSpaced paddingTop="1rem" width="100%">

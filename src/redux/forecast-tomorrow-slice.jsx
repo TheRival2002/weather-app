@@ -10,6 +10,7 @@ const forecastTomorrowSlice = createSlice({
           morning_wind: 4,
           morning_pressure: 1000,
           morning_condition: "Sunny",
+          morning_date: "2023-08-25",
         },
       },
       {
@@ -18,6 +19,7 @@ const forecastTomorrowSlice = createSlice({
           afternoon_wind: 4,
           afternoon_pressure: 1000,
           afternoon_condition: "Sunny",
+          afternoon_date: "2023-08-25",
         },
       },
     ],
