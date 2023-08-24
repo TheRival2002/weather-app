@@ -1,5 +1,4 @@
 import CitiesList from "../sections/Home/OtherCities/CitiesList";
-import OtherCities from "../sections/Home/OtherCities/OtherCities";
 import { GridMain } from "../styles/Appbar";
 import { LinkBtn } from "../styles/components/LinkBtn";
 import { StyledListItemText } from "../styles/components/MyList";

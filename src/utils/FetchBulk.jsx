@@ -40,7 +40,7 @@ export const fetchBulk = createAsyncThunk("data/fetchBulk", async () => {
   };
   try {
     const resp = await axios.post(
-      `http://api.weatherapi.com/v1/current.json?key=bec38ddacd7d46baa07161946231508&q=bulk`,
+      `https://api.weatherapi.com/v1/current.json?key=bec38ddacd7d46baa07161946231508&q=bulk`,
       bulkRequestData,
       {
         headers: {
