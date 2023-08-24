@@ -46,3 +46,11 @@ export const StyledCardContent = styled(CardContent)(() => ({
   alignItems: "center",
   minHeight: "210px",
 }));
+
+export const StyledCardContentRow = styled(CardContent)(() => ({
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  minHeight: "110px",
+}));

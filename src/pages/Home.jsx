@@ -3,6 +3,7 @@ import WeatherPrognosis from "../sections/Home/WeatherPrognosis/WeatherPrognosis
 import { GridMain } from "../styles/Appbar";
 import RainChart from "../sections/Home/RainChart/RainChart";
 import GlobalMap from "../sections/Home/GlobalMap/GlobalMap";
+import OtherCities from "../sections/Home/OtherCities/OtherCities";
 
 const MainContent = () => {
   return (
@@ -20,6 +21,9 @@ const MainContent = () => {
       </Grid>
       <Grid item xs={8}>
         <GlobalMap />
+      </Grid>
+      <Grid item xs={4}>
+        <OtherCities />
       </Grid>
     </GridMain>
   );
