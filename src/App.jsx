@@ -4,6 +4,7 @@ import theme from "./styles/theme";
 import Header from "./sections/Header";
 import MainContent from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
+import Cities from "./pages/Cities";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/weather-app/" element={<MainContent />} />
+          <Route path="/weather-app/cities" element={<Cities />} />
         </Routes>
       </Container>
     </ThemeProvider>
