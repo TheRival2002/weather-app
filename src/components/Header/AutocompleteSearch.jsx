@@ -1,34 +1,64 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { StyledTextfield } from "../../styles/Header/StyledTextfield";
-import { InputAdornment } from "@mui/material";
+import { Autocomplete, InputAdornment, Paper } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLocationActions } from "../../redux/change-location-slice";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   fetchWeatherActions,
-  weatherData,
-  weatherError,
   weatherLoading,
 } from "../../redux/fetch-weather-slice";
 import { fetchForecast } from "../../utils/FetchForecast";
+import { fetchSearch } from "../../utils/FetchSearch";
+import { searchData } from "../../redux/fetch-search-slice";
+import debounce from "lodash.debounce";
 
 export const AutocompleteSearch = () => {
   const dispatch = useDispatch();
+
+  const optionsData = useSelector(searchData);
+  const autocompleteOptions = useSelector(
+    (state) => state.changedLocation.searchOptions
+  );
+  useEffect(() => {
+    if (
+      optionsData !== "string" &&
+      Array.isArray(optionsData) &&
+      optionsData.length !== 0
+    ) {
+      dispatch(
+        changeLocationActions.changeSearchOptions(
+          optionsData.map((el) => el.name)
+        )
+      );
+    }
+  }, [optionsData]);
+
+  const autocompleteOption = useSelector(
+    (state) => state.changedLocation.autocompleteOption
+  );
   const location = useSelector((state) => state.changedLocation.location);
   const enterValue = useSelector((state) => state.changedLocation.enterValue);
 
-  const controlEnterValue = (e) => {
-    dispatch(changeLocationActions.changeEnterValue(e.target.value));
+  const changeOption = (e, newValue) => {
+    dispatch(changeLocationActions.changeAutocompleteOption(newValue));
+    dispatch(changeLocationActions.changeLocation(newValue));
   };
 
-  const controlEnterPress = (e) => {
-    if (e.key === "Enter") {
-      dispatch(changeLocationActions.changeLocation(e.target.value));
-    }
+  const controlEnterValue = (e, newValue) => {
+    dispatch(changeLocationActions.changeEnterValue(newValue));
+    debouncedFetchSearch();
   };
 
-  // const forecast = useSelector(weatherData);
-  // const error = useSelector(weatherError);
+  const sendInfoToFetchSearch = () => {
+    dispatch(fetchSearch(enterValue));
+  };
+
+  const debouncedFetchSearch = useMemo(
+    () => debounce(sendInfoToFetchSearch, 250),
+    [enterValue]
+  );
+
   const loading = useSelector(weatherLoading);
 
   useEffect(() => {
@@ -43,30 +73,44 @@ export const AutocompleteSearch = () => {
     }
   }, [location]);
 
-  // let content;
-  // if (loading === "loading") {
-  //   content = "Loading...";
-  // } else if (loading === "succeeded") {
-  //   content = forecast;
-  // } else if (loading === "failed") {
-  //   content = error;
-  // }
+  const options = ["Split", "Zagreb", "London"];
 
   return (
     <>
-      <StyledTextfield
-        label="Search city..."
-        variant="outlined"
-        value={enterValue}
-        onChange={(e) => controlEnterValue(e)}
-        onKeyDown={controlEnterPress}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon sx={{ color: "white.main" }} />
-            </InputAdornment>
-          ),
-        }}
+      <Autocomplete
+        fullWidth
+        id="autocomplete"
+        freeSolo
+        options={
+          autocompleteOptions.length !== 0 ? autocompleteOptions : options
+        }
+        value={autocompleteOption}
+        onChange={changeOption}
+        inputValue={enterValue}
+        onInputChange={controlEnterValue}
+        renderInput={(params) => (
+          <StyledTextfield
+            {...params}
+            label="Search city..."
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: "white.main" }} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        )}
+        PaperComponent={(props) => (
+          <Paper
+            sx={{
+              backgroundColor: "primary.main",
+              color: "text.main",
+            }}
+            {...props}
+          />
+        )}
       />
     </>
   );

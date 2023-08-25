@@ -7,6 +7,8 @@ const changeLocationSlice = createSlice({
     country: "USA",
     city: "Seattle",
     enterValue: "",
+    autocompleteOption: null,
+    searchOptions: [],
   },
   reducers: {
     changeLocation(state, action) {
@@ -20,6 +22,12 @@ const changeLocationSlice = createSlice({
     },
     changeEnterValue(state, action) {
       state.enterValue = action.payload;
+    },
+    changeAutocompleteOption(state, action) {
+      state.autocompleteOption = action.payload;
+    },
+    changeSearchOptions(state, action) {
+      state.searchOptions = action.payload;
     },
   },
 });

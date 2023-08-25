@@ -11,6 +11,7 @@ import mapHeightSlice from "./map-height-slice";
 import fetchBulkSlice from "./fetch-bulk-slice";
 import bulkDataSlice from "./bulk-data-slice";
 import selectCitySlice from "./select-city-slice";
+import fetchSearchSlice from "./fetch-search-slice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
     bulk: fetchBulkSlice.reducer,
     bulkData: bulkDataSlice.reducer,
     selectedCity: selectCitySlice.reducer,
+    search: fetchSearchSlice.reducer,
   },
 });
 
