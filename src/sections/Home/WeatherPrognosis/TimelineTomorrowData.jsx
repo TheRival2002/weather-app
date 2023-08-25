@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { weatherData } from "../../../redux/fetch-weather-slice";
 import { forecastTomorrowActions } from "../../../redux/forecast-tomorrow-slice";
+import moment from "moment";
 
 const TimelineTomorrowData = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,9 @@ const TimelineTomorrowData = () => {
       timelineData === "forecast"
     ) {
       const morning = forecast.forecast.forecastday[1].hour[10];
+      const morning_day_name = moment(
+        forecast.forecast.forecastday[1].date
+      ).format("dddd");
       const morning_temp = morning.temp_c;
       const morning_wind = morning.wind_kph;
       const morning_pressure = morning.pressure_mb;
@@ -32,6 +36,9 @@ const TimelineTomorrowData = () => {
       const morning_date = forecast.forecast.forecastday[1].date;
 
       const afternoon = forecast.forecast.forecastday[1].hour[20];
+      const afternoon_day_name = moment(
+        forecast.forecast.forecastday[1].date
+      ).format("dddd");
       const afternoon_temp = afternoon.temp_c;
       const afternoon_wind = afternoon.wind_kph;
       const afternoon_pressure = afternoon.pressure_mb;
@@ -41,6 +48,7 @@ const TimelineTomorrowData = () => {
       const data = [
         {
           morning: {
+            morning_day_name,
             morning_temp,
             morning_wind,
             morning_pressure,
@@ -50,6 +58,7 @@ const TimelineTomorrowData = () => {
         },
         {
           afternoon: {
+            afternoon_day_name,
             afternoon_temp,
             afternoon_wind,
             afternoon_pressure,
@@ -65,6 +74,9 @@ const TimelineTomorrowData = () => {
       timelineData === "air quality"
     ) {
       const morning = forecast.forecast.forecastday[1].hour[10];
+      const morning_day_name = moment(
+        forecast.forecast.forecastday[1].date
+      ).format("dddd");
       const morning_air = morning.air_quality;
       const morning_co = morning_air.co;
       const morning_no2 = morning_air.no2;
@@ -73,6 +85,9 @@ const TimelineTomorrowData = () => {
       const morning_date = forecast.forecast.forecastday[1].date;
 
       const afternoon = forecast.forecast.forecastday[1].hour[20];
+      const afternoon_day_name = moment(
+        forecast.forecast.forecastday[1].date
+      ).format("dddd");
       const afternoon_air = afternoon.air_quality;
       const afternoon_co = afternoon_air.co;
       const afternoon_no2 = afternoon_air.no2;
@@ -83,6 +98,7 @@ const TimelineTomorrowData = () => {
       const data = [
         {
           morning: {
+            morning_day_name,
             morning_co,
             morning_no2,
             morning_pm10,
@@ -92,6 +108,7 @@ const TimelineTomorrowData = () => {
         },
         {
           afternoon: {
+            afternoon_day_name,
             afternoon_co,
             afternoon_no2,
             afternoon_pm10,
@@ -129,7 +146,7 @@ const TimelineTomorrowData = () => {
               fontWeight: "600",
             }}
           >
-            Friday
+            {data[0].morning.morning_day_name}
           </Typography>
           <Typography variant="subtitle1" component="h3">
             {data[0].morning.morning_date}

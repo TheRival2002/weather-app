@@ -6,6 +6,7 @@ import { weekDayActions } from "../../../redux/week-day-slice";
 import { weatherData } from "../../../redux/fetch-weather-slice";
 import { useEffect } from "react";
 import { forecastWeekActions } from "../../../redux/forecast-week-slice";
+import moment from "moment";
 
 const TimelineWeekData = () => {
   const dispatch = useDispatch();
@@ -14,22 +15,13 @@ const TimelineWeekData = () => {
   const timelineData = useSelector((state) => state.timelineData.timelineData);
 
   useEffect(() => {
-    const days = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ];
     if (
       typeof forecast !== "string" &&
       !Array.isArray(forecast) &&
       timelineData === "forecast"
     ) {
       const mappedForecast = forecast.forecast.forecastday.map((day, ind) => {
-        const dayName = days[ind];
+        const dayName = moment(day.date).format("dddd");
         const condition = day.day.condition.text;
         const realFeel = day.day.avgtemp_c;
         const pressure = day.hour[0].pressure_mb;
@@ -55,8 +47,8 @@ const TimelineWeekData = () => {
       timelineData === "air quality"
     ) {
       const mappedAirQuality = forecast.forecast.forecastday.map((day, ind) => {
+        const dayName = moment(day.date).format("dddd");
         const airQuality = day.day.air_quality;
-        const dayName = days[ind];
         const condition = day.day.condition.text;
         const realFeel = day.day.avgtemp_c;
         const co = airQuality.co;
