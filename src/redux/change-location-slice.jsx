@@ -29,6 +29,9 @@ const changeLocationSlice = createSlice({
     changeSearchOptions(state, action) {
       state.searchOptions = action.payload;
     },
+    clearSearchOptions(state, action) {
+      state.searchOptions = [];
+    },
   },
 });
 

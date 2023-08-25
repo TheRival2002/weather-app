@@ -28,7 +28,9 @@ export const AutocompleteSearch = () => {
     ) {
       dispatch(
         changeLocationActions.changeSearchOptions(
-          optionsData.map((el) => el.name)
+          optionsData.map((el) => {
+            return { name: el.name, id: String(el.id), key: String(el.id) };
+          })
         )
       );
     }
@@ -42,22 +44,36 @@ export const AutocompleteSearch = () => {
 
   const changeOption = (e, newValue) => {
     dispatch(changeLocationActions.changeAutocompleteOption(newValue));
-    dispatch(changeLocationActions.changeLocation(newValue));
+    dispatch(
+      changeLocationActions.changeLocation(
+        newValue?.name ? newValue.name : location
+      )
+    );
   };
 
   const controlEnterValue = (e, newValue) => {
     dispatch(changeLocationActions.changeEnterValue(newValue));
-    debouncedFetchSearch();
   };
 
   const sendInfoToFetchSearch = () => {
     dispatch(fetchSearch(enterValue));
   };
 
-  const debouncedFetchSearch = useMemo(
-    () => debounce(sendInfoToFetchSearch, 250),
-    [enterValue]
-  );
+  const debouncedFetchSearch = useMemo(() => {
+    return debounce(sendInfoToFetchSearch, 250);
+  }, [enterValue]);
+
+  useEffect(() => {
+    enterValue.length > 3 && debouncedFetchSearch();
+
+    if (enterValue.length === 0) {
+      dispatch(changeLocationActions.clearSearchOptions());
+    }
+
+    return () => {
+      debouncedFetchSearch.cancel();
+    };
+  }, [enterValue]);
 
   const loading = useSelector(weatherLoading);
 
@@ -73,7 +89,11 @@ export const AutocompleteSearch = () => {
     }
   }, [location]);
 
-  const options = ["Split", "Zagreb", "London"];
+  const options = [
+    { name: "Split", id: "1234" },
+    { name: "Zagreb", id: "2345" },
+    { name: "London", id: "3456" },
+  ];
 
   return (
     <>
@@ -84,6 +104,14 @@ export const AutocompleteSearch = () => {
         options={
           autocompleteOptions.length !== 0 ? autocompleteOptions : options
         }
+        getOptionLabel={(option) => `${option.name}`}
+        renderOption={(props, option) => {
+          return (
+            <li {...props} key={option.id}>
+              {option.name}
+            </li>
+          );
+        }}
         value={autocompleteOption}
         onChange={changeOption}
         inputValue={enterValue}
