@@ -8,6 +8,24 @@ import RainImg from "../../../../assets/rainy-day.png";
 import SunImg from "../../../../assets/sun.png";
 import StormImg from "../../../../assets/storm.png";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
+const isSelectedVariants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      y: {
+        duration: 0.5,
+      },
+    },
+  },
+};
 
 export const TimelineWeekItem = (props) => {
   const timelineData = useSelector((state) => state.timelineData.timelineData);
@@ -65,7 +83,12 @@ export const TimelineWeekItem = (props) => {
             </Typography>
           )}
           {props.isSelected && (
-            <Box>
+            <Box
+              component={motion.div}
+              variants={isSelectedVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <Typography variant="body2" component="p">
                 {timelineData === "forecast" ? "Real feel:" : "Carbon:"}
                 <Typography
@@ -105,7 +128,12 @@ export const TimelineWeekItem = (props) => {
             </Box>
           )}
           {props.isSelected && (
-            <Box>
+            <Box
+              component={motion.div}
+              variants={isSelectedVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <Typography variant="body2" component="p">
                 {timelineData === "forecast" ? "Wind:" : "Sulphur:"}
                 <Typography

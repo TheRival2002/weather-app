@@ -6,6 +6,13 @@ import {
 } from "../../styles/components/StyledToggleButtonGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { colorModeActions } from "../../redux/color-mode-slice";
+import { motion } from "framer-motion";
+
+const toggleBtnVariants = {
+  hover: {
+    scale: 1.1,
+  },
+};
 
 export const ColorMode = () => {
   const dispatch = useDispatch();
@@ -31,14 +38,24 @@ export const ColorMode = () => {
         value="light"
         aria-label="light mode"
       >
-        <Brightness5OutlinedIcon sx={{ fontSize: "1.5rem" }} />
+        <Brightness5OutlinedIcon
+          sx={{ fontSize: "1.5rem" }}
+          component={motion.svg}
+          variants={toggleBtnVariants}
+          whileHover={colorMode === "dark" && "hover"}
+        />
       </StyledToggleButton>
       <StyledToggleButton
         onClick={setDarkMode}
         value="dark"
         aria-label="dark mode"
       >
-        <NightsStayRoundedIcon sx={{ fontSize: "1.5rem" }} />
+        <NightsStayRoundedIcon
+          sx={{ fontSize: "1.5rem" }}
+          component={motion.svg}
+          variants={toggleBtnVariants}
+          whileHover={colorMode === "light" && "hover"}
+        />
       </StyledToggleButton>
     </StyledToggleButtonGroup>
   );

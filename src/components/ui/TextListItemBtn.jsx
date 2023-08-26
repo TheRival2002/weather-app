@@ -5,6 +5,7 @@ import {
   StyledListItemText,
 } from "../../styles/components/MyList";
 import { daysQuantityActions } from "../../redux/days-quantity-data-slice";
+import { motion } from "framer-motion";
 
 export const TextListItemBtn = ({ text, ind }) => {
   const dispatch = useDispatch();
@@ -20,7 +21,11 @@ export const TextListItemBtn = ({ text, ind }) => {
   return (
     <MyListItem disablePadding>
       <StyledListItemButton
-        component="button"
+        component={motion.div}
+        whileHover={{
+          scale: 1.1,
+          transition: { duration: 0.3 },
+        }}
         selected={quantityIndex === ind}
         sx={{ padding: "0" }}
         onClick={handleClick}

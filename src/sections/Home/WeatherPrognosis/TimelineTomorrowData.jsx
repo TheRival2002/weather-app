@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { weatherData } from "../../../redux/fetch-weather-slice";
 import { forecastTomorrowActions } from "../../../redux/forecast-tomorrow-slice";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 const TimelineTomorrowData = () => {
   const dispatch = useDispatch();
@@ -131,7 +132,12 @@ const TimelineTomorrowData = () => {
 
   return (
     <StyledCard>
-      <StyledCardContent sx={{ alignItems: "start" }}>
+      <StyledCardContent
+        sx={{ alignItems: "start" }}
+        component={motion.div}
+        initial={{ x: "-100vw" }}
+        animate={{ x: "0" }}
+      >
         <StackSpaced
           sx={{
             width: "100%",

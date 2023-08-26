@@ -7,6 +7,7 @@ import { weatherData } from "../../../redux/fetch-weather-slice";
 import { useEffect } from "react";
 import { forecastWeekActions } from "../../../redux/forecast-week-slice";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 const TimelineWeekData = () => {
   const dispatch = useDispatch();
@@ -107,7 +108,16 @@ const TimelineWeekData = () => {
     );
   });
 
-  return <MyList disablePadding>{mappedListItems}</MyList>;
+  return (
+    <MyList
+      disablePadding
+      component={motion.ul}
+      initial={{ x: "-100vw" }}
+      animate={{ x: "0" }}
+    >
+      {mappedListItems}
+    </MyList>
+  );
 };
 
 export default TimelineWeekData;

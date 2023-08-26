@@ -4,11 +4,20 @@ import { GridMain } from "../styles/Appbar";
 import RainChart from "../sections/Home/RainChart/RainChart";
 import GlobalMap from "../sections/Home/GlobalMap/GlobalMap";
 import OtherCities from "../sections/Home/OtherCities/OtherCities";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  exit: {
+    x: "-100vw",
+  },
+};
 
 const MainContent = () => {
   return (
     <GridMain
-      component="main"
+      component={motion.main}
+      variants={containerVariants}
+      exit="exit"
       rowSpacing={4}
       container
       borderRadius="0 0 2rem 2rem"

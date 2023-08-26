@@ -15,7 +15,37 @@ export const Colors = {
   white_dimmed: "#a7a7a7",
 };
 
-const theme = createTheme({
+export const lightTheme = createTheme({
+  palette: {
+    background: {
+      default: Colors.background,
+    },
+    primary: {
+      main: Colors.primary,
+      light: Colors.primary_hover,
+    },
+    secondary: {
+      main: Colors.secondary,
+    },
+    text: {
+      primary: Colors.text_primary,
+    },
+    black: {
+      main: Colors.black,
+    },
+    light_black: {
+      main: "#161616",
+    },
+    white: {
+      main: Colors.white,
+    },
+    white_dimmed: {
+      main: Colors.white_dimmed,
+    },
+  },
+});
+
+export const darkTheme = createTheme({
   palette: {
     background: {
       default: Colors.background,
@@ -44,5 +74,3 @@ const theme = createTheme({
     },
   },
 });
-
-export default theme;
