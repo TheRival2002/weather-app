@@ -90,7 +90,14 @@ const TimelineWeekData = () => {
 
   const mappedListItems = weekData.map((el, index) => {
     return (
-      <MyListItem disablePadding key={index}>
+      <MyListItem
+        disablePadding
+        key={index}
+        component={motion.li}
+        whileHover={{
+          scale: 1.1,
+        }}
+      >
         <ListItemButton
           sx={{
             padding: "0",
@@ -110,10 +117,16 @@ const TimelineWeekData = () => {
 
   return (
     <MyList
+      key={timelineData}
       disablePadding
       component={motion.ul}
       initial={{ x: "-100vw" }}
-      animate={{ x: "0" }}
+      animate={{
+        x: "0",
+        transition: {
+          ease: "easeOut",
+        },
+      }}
     >
       {mappedListItems}
     </MyList>

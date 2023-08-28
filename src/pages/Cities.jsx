@@ -15,8 +15,17 @@ const componentVariants = {
 };
 
 const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      ease: "easeInOut",
+    },
+  },
   exit: {
-    x: "-100vw",
+    filter: "blur(10px)",
   },
 };
 
@@ -25,6 +34,8 @@ const Cities = () => {
     <GridMain
       component={motion.main}
       variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       exit="exit"
       rowSpacing={4}
       container

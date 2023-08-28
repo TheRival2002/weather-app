@@ -133,10 +133,16 @@ const TimelineTomorrowData = () => {
   return (
     <StyledCard>
       <StyledCardContent
+        key={timelineData}
         sx={{ alignItems: "start" }}
         component={motion.div}
         initial={{ x: "-100vw" }}
-        animate={{ x: "0" }}
+        animate={{
+          x: "0",
+          transition: {
+            ease: "easeOut",
+          },
+        }}
       >
         <StackSpaced
           sx={{
